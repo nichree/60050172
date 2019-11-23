@@ -120,16 +120,16 @@ public class CustomerController {
 		  Connection conn = null;
 		  ResultSet rs = null;
 		  PreparedStatement pst = null;
-		  try {
-			  conn = DriverManager.getConnection(
-					  "jdbc:mysq1://1ocal host:3306/workshop", "root", "root");
+		  try { 
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/workshop",  "root", "p@ssw0rd");
 			  pst = conn.prepareStatement(
-					  "UPDATE customer SET" +
+					  "UPDATE customer SET " +
 					  "first_name = ? ," +
 					  "last_name = ? ," +
 					  "address = ? ," +
 					  "tel = ? ," +
-					  "email = ? ," +
+					  "email = ? " +
 					  "WHERE customer_Id = ?");
 			  int index = 1;
 			  pst.setString(index++, customer.getFirstName());
@@ -138,6 +138,7 @@ public class CustomerController {
 			  pst.setString(index++, customer.getTel());
 			  pst.setString(index++, customer.getEmail());
 			  pst.setLong(index++, customer.getCustomerId());
+				pst.executeUpdate();
 		 }
 		 catch (Exception e) {
 				e.printStackTrace();
